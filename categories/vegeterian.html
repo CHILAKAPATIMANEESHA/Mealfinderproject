@@ -98,7 +98,7 @@
 </div>
 <div class="menu-icon">
     <i class="fa-solid fa-bars"></i>
-    <!-- Menu List -->
+    
 <nav class="menu-list" id="menuList">
   <ul>
     <li><a href="#">Beef</a></li>
@@ -148,7 +148,7 @@
 <script>
 const container = document.getElementById("mealContainer");
 
-// Fetch Vegetarian meals
+
 fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian")
   .then(res => res.json())
   .then(data => {
