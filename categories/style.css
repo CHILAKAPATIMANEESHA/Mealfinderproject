@@ -67,7 +67,7 @@ body {
   display: none;
   background: #fff;
   position: absolute;
-  top: 60px;  /* below topbar */
+  top: 60px;  
   right: 10px;
   width: 200px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -178,15 +178,15 @@ button:hover{
 
 .heading {
   position: relative;
-  display: inline-block; /* so underline only applies to text width */
+  display: inline-block; 
 }
 
 .heading::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -5px; /* adjust distance from text */
-  width: 50%;   /* 👈 underline covers half */
+  bottom: -5px; 
+  width: 50%;
   height: 3px;
   background-color: orange;
 }
@@ -229,7 +229,7 @@ button:hover{
   width: 400px;
   cursor: pointer;
   transition: 0.3s;
-  position: relative;   /* <-- Add this */
+  position: relative;   
 }
 
 .card img {
@@ -241,8 +241,8 @@ button:hover{
 }
 
 .card:hover img {
-  transform: scale(1.08);   /* zoom effect */
-  filter: brightness(0.9);  /* slightly darken */
+  transform: scale(1.08);   
+  filter: brightness(0.9);  
 }
 
 .card:hover {
