@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Details</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; }
+img { max-width: 400px; border-radius: 8px; margin-bottom: 20px; }
+h1 { color: orangered; margin-bottom: 10px; }
+h2 { margin-top: 20px; }
+ul { list-style: none; padding-left: 0; }
+li { margin-bottom: 5px; }
+</style>
+</head>
+<body>
+
+<h1 id="meal-name">Loading...</h1>
+<img id="meal-image" src="" alt="Meal Image">
+<p><b>Category:</b> <span id="meal-category"></span></p>
+
+<h2>Ingredients & Measures</h2>
+<ul id="meal-ingredients"></ul>
+
+<h2>Instructions</h2>
+<p id="meal-instructions"></p>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const mealName = params.get("name");
+
+if(mealName){
+  fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(mealName)}`)
+    .then(res => res.json())
+    .then(data => {
+      if(!data.meals) {
+        document.getElementById("meal-name").textContent = "Meal not found!";
+        return;
+      }
+
+      const meal = data.meals[0];
+
+      document.getElementById("meal-name").textContent = meal.strMeal;
+      document.getElementById("meal-image").src = meal.strMealThumb;
+      document.getElementById("meal-category").textContent = meal.strCategory;
+
+      // Ingredients & measures
+      const ul = document.getElementById("meal-ingredients");
+      ul.innerHTML = "";
+      for(let i=1;i<=20;i++){
+        const ingredient = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
+        if(ingredient && ingredient.trim() !== ""){
+          const li = document.createElement("li");
+          li.textContent = `${ingredient} - ${measure}`;
+          ul.appendChild(li);
+        }
+      }
+
+      // Instructions
+      document.getElementById("meal-instructions").textContent = meal.strInstructions;
+
+    })
+    .catch(err => console.error("Error:", err));
+} else {
+  document.getElementById("meal-name").textContent = "No meal selected!";
+}
+</script>
+</body>
+</html>
